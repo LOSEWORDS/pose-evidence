@@ -1,3 +1,4 @@
+# PoseEvidence
 ![PoseEvidence](docs/architecture.svg)
 A training-free scientific agent for protein–ligand structure prediction with frozen Boltz-2.
 
