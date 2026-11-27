@@ -1,13 +1,20 @@
 # PoseEvidence
-![PoseEvidence](docs/architecture.svg)
-A training-free scientific agent for protein–ligand structure prediction with frozen Boltz-2.
 
-PoseEvidence retrieves literature and reference-structure evidence, maps relevant residues, and uses these observations to plan explicit `pocket` or `contact` conditions. It then predicts structures, measures the candidates, and updates a versioned research board before deciding whether to run another round or deliver an mmCIF.
+![PoseEvidence agent architecture](docs/architecture.svg)
 
-
-The agent keeps tool measurements separate from hypotheses and decisions. Experimental target structures are reserved for offline evaluation. Boltz confidence, physical checks, and experimental agreement are reported as different quantities.
+PoseEvidence is a training-free scientific agent for protein–ligand structure prediction with frozen Boltz-2. We built it around a question: **can scientific evidence improve what the folding model predicts in the first place?**
 
 [Research presentation and interactive case study](https://losewords.github.io/pose-evidence/)
+
+## Design rationale
+
+**Start with the limits of local refinement.** Our first prototype predicted a structure and then asked the agent to inspect and, when warranted, revise it. A short contact made the limits of that approach concrete. Distance can flag a geometry problem, while chemical identity and orientation are needed to interpret it. A local repair can improve geometry while leaving the accuracy of the binding pose unresolved.
+
+**Use evidence to guide the next prediction.** Boltz-2 accepts explicit binding-site conditions without changing its weights. The agent retrieves literature and related structures, checks how reference residues map to the target sequence, and decides whether the evidence warrants a `pocket` constraint for a region or a `contact` constraint for a specific pair. Each condition makes a structural hypothesis testable through a new prediction.
+
+**Measure, update, and decide.** After prediction, tools compare candidate poses and measure contact geometry and stereochemistry. The research board records these observations separately from the agent’s interpretations. The agent uses them to revise a hypothesis, plan another round, or deliver a structure with its limitations.
+
+We evaluate experimental agreement offline using ligand RMSD and lDDT-PLI. The target experimental structure is held out from the agent’s decisions. Model confidence and physical checks describe different properties of a candidate.
 
 ## Run locally
 
