@@ -1,10 +1,8 @@
-# PoseEvidence
-
+![PoseEvidence](docs/architecture.svg)
 A training-free scientific agent for protein–ligand structure prediction with frozen Boltz-2.
 
 PoseEvidence retrieves literature and reference-structure evidence, maps relevant residues, and uses these observations to plan explicit `pocket` or `contact` conditions. It then predicts structures, measures the candidates, and updates a versioned research board before deciding whether to run another round or deliver an mmCIF.
 
-![PoseEvidence agent architecture](docs/architecture.svg)
 
 The agent keeps tool measurements separate from hypotheses and decisions. Experimental target structures are reserved for offline evaluation. Boltz confidence, physical checks, and experimental agreement are reported as different quantities.
 
