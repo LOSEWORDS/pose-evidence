@@ -1,0 +1,9 @@
+boltz==2.2.1
+biopython==1.84
+gemmi==0.6.5
+numpy==1.26.4
+posebusters==0.4.4
+psutil>=5.9
+PyYAML>=6,<7
+rdkit
+requests>=2.32,<3
